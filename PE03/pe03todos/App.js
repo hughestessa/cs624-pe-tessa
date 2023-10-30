@@ -1,30 +1,49 @@
 
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { StyleSheet, View, ScrollView } from 'react-native';
 import Heading from './Heading';
 import Input from './Input';
 import Button from './Button';
+import TodoList from './TodoList';
 
 let todoIndex = 0
 
 class App extends Component {
   constructor() {
-    super();
+    super()
     this.state = {
       inputValue: '',
       todos: [],
       type: 'All',
-    };
-    this.submitTodo = this.submitToDo.bind(this)
+    }
+    this.submitTodo = this.submitTodo.bind(this)
+    this.toggleComplete = this.toggleComplete.bind(this)
+    this.deleteTodo = this.deleteTodo.bind(this)
   }
+
+deleteTodo (todoIndex) {
+  let {todos} = this.state
+  todos = todos.filter((todo) => todo.todoIndex !== todoIndex)
+  this.setState({todos})
+}
+
+toggleComplete (todoIndex) {
+  let todos = this.state.todos
+  todos.forEach((todo) => {
+    if (todo.todoIndex === todoIndex) {
+      todo.complete = !todo.complete
+    }
+  })
+  this.setState({todos})
+}
 
   inputChange(inputValue) {
-    console.log('Input Value: ',inputValue);
-    this.setState({inputValue});
+    console.log('Input Value: ', inputValue)
+    this.setState({ inputValue })
   }
 
-  submitToDo () {
-    if(this.state.inputValue.match(/^\s8$/)){
+  submitTodo () {
+    if (this.state.inputValue.match(/^\s*$/)) {
       return
     }
     const todo = {
@@ -40,18 +59,22 @@ class App extends Component {
   }
   
   render() {
-    const {inputValue} = this.state;
+    const {inputValue, todos} = this.state
     return (
     <View style={styles.container}>
-      <ScrollView keyboardSouldPersistTaps="always" style={styles.content}>
+      <ScrollView keyboardShouldPersistTaps='never' style={styles.content}>
         <Heading />
         <Input
           inputValue={inputValue}
-          inputChange={text => this.inputChange(text)} />
-          <Button submitTodo={this.submitTodo} />
+          inputChange={(text) => this.inputChange(text)} />
+        <TodoList 
+          toggleComplete={this.toggleComplete}
+          deleteTodo={this.deleteTodo}
+          todos={todos} />
+        <Button submitTodo={this.submitTodo} />
       </ScrollView>
     </View>
-  );
+  )
   }
 }
 
