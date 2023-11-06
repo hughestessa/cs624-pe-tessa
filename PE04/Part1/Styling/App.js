@@ -17,7 +17,7 @@ export default class App extends Component<{}> {
           </View>
           <View style={styles.cardOccupationContainer}>
             <Text style={styles.cardOccupation}>
-              React Native Developer
+              Jr. React Native Developer
             </Text>
           </View>
           <View>
@@ -67,6 +67,8 @@ const styles = StyleSheet.create({
   cardName: {
     color: 'white',
     marginTop: 30,
+    fontSize: 20,
+    fontWeight: 'bold'
 },
 cardOccupationContainer: {
     borderColor: 'black',
