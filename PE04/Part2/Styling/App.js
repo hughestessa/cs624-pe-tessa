@@ -14,17 +14,18 @@ const data = [{
     showThumbnail: true
   },
   {
-    image: userImage,
-    name: 'John Doe',
-    occupation: 'React Native Developer',
-    description: 'John is another person.',
+    image: require('./assets/Chloe.jpg'),
+    name: 'Chloe',
+    occupation: 'Guinea Pig',
+    description: 'Chloe likes to hang out with Tessa while she learns to code. '
+    + 'Her favorite treats are carrots and lettuce. ',
     showThumbnail: true
   },
   {
     image: userImage,
     name: 'Jane Eyre',
     occupation: 'Governess',
-    description: 'Jane is a character is a romance book.',
+    description: 'Jane is a character in Tessa\'s favorite romance movie.',
     showThumbnail: true
   }
 ];
@@ -102,11 +103,10 @@ export default class App extends Component {
     return (
       
       <View style={styles.container}>
-        <ScrollView>
+       <ScrollView>
           {list} 
         </ScrollView>
       </View>
-      
     );
   }
 }
@@ -123,12 +123,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#728cd4',
   },
   cardContainer: {
-    alignSelf: 'center',
+    //alignSelf: 'center',
     backgroundColor: profileCardColor,
-    margin: 10,
-    width: 300,
-    height: 400,
-    flex: 1,
+    margin: 5,
+    width: 400,
+    height: 230,
+    //flex: 1,
     alignItems: 'center',
     borderColor: 'black',
     borderWidth: 3,
@@ -137,11 +137,11 @@ const styles = StyleSheet.create({
     ...Platform.select({
       ios: {
         shadowColor: 'black',
-        shadowOffset: {height: 10},
+        shadowOffset: {height: 5},
         shadowOpacity: 1
       },
       android: {
-        elevation: 15
+        elevation: 10
       }
     })
   },
@@ -150,11 +150,11 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderColor: 'black',
     borderWidth: 3,
-    width: 120,
-    height: 120,
+    width: 65,
+    height: 65,
     borderRadius: 60,
-    marginTop: 30,
-    paddingTop: 15,
+    marginTop: 15,
+    paddingTop: 3,
     ...Platform.select({
       ios: {
         shadowColor: 'black',
@@ -169,13 +169,15 @@ const styles = StyleSheet.create({
     })
   },
   cardImage: {
-    width: 80,
-    height: 80,
+    width: 55,
+    height: 55,
+    borderRadius: 60,
   },
   cardName: {
     color: 'white',
-    marginTop: 30,
-    fontSize: 20,
+    marginTop: 15,
+    marginBottom: 5,
+    fontSize: 18,
     fontWeight: 'bold'
 },
 cardOccupationContainer: {
@@ -183,16 +185,16 @@ cardOccupationContainer: {
     borderBottomWidth: 3
 },
 cardOccupation: {
-    marginTop: 10,
-    marginBottom: 10,
+    marginTop: 5,
+    marginBottom: 5,
     fontWeight: 'bold'
 },
 cardDescription: {
     fontStyle: 'italic', 
     marginTop: 10,
-    marginRight: 40,
-    marginLeft: 40,
-    marginBottom: 10
+    marginRight: 20,
+    marginLeft: 20,
+    marginBottom: 5
 },
 cardThumbnail: {
   transform: [{scale: 0.2}],
