@@ -14,6 +14,7 @@ import Cities from './src/Cities/Cities'
 import City from './src/Cities/City'
 import AddCity from './src/AddCity/AddCity'
 import Countries from './src/Countries/Countries'
+import Country from './src/Countries/Country'
 import AddCountry from './src/AddCountry/AddCountry'
 
 import { colors } from './src/theme'
@@ -39,6 +40,26 @@ function CitiesStackScreen ({navigation, route}){
         addLocation: route.params.addLocation}}/>
       </Stack.Navigator>
     );
+}
+
+function CountriesStackScreen ({navigation, route}){
+  return (
+    <Stack.Navigator screenOptions={{
+      headerStyle: {
+        backgroundColor: colors.primary
+      },
+      headerTintColor: '#fff'
+    }}>
+    <Stack.Screen name="Countries" component={Countries} initialParams={{
+      countries: route.params.countries,
+      addCountry: route.params.addCountry,
+      addCurrency: route.params.addCurrency}} />
+    <Stack.Screen name="Country" component={Country} initialParams={{
+      countries: route.params.countries,
+      addCountry: route.params.addCountry,
+      addCurrency: route.params.addCurrency}}/>
+    </Stack.Navigator>
+  );
 }
 
 export default class App extends Component {
@@ -97,15 +118,15 @@ export default class App extends Component {
               )
             }}
             />
-          <Tab.Screen name="Countries"  initialParams={{countries: this.state.countries, addCountry: this.addCountry}} 
-            component={Countries} 
+          <Tab.Screen name="CountriesNav"  initialParams={{countries: this.state.countries, addCountry: this.addCountry, addCurrency: this.addCurrency}} 
+            component={CountriesStackScreen} 
             options={{
               tabBarIcon: () => (
                 <MaterialCommunityIcons name="map" size={20} color='black' />
               )
             }}
             />
-          <Tab.Screen name="AddCountry" initialParams={{countries: this.state.countries, addCountry: this.addCountry}} 
+          <Tab.Screen name="AddCountry" initialParams={{countries: this.state.countries, addCountry: this.addCountry, addCurrency: this.addCurrency}} 
             component={AddCountry} 
             options={{
               tabBarIcon: () => (
