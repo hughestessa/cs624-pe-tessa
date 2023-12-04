@@ -94,6 +94,23 @@ export default class App extends Component {
       cities
     })
   }
+
+  addCurrency = (currency, country) => {
+    const index = this.state.countries.findIndex(item => {
+      return item.id === country.id
+    })
+    const chosenCountry = this.state.countries[index]
+    chosenCountry.currencies.push(currency)
+    const countries = [
+      ...this.state.countries.slice(0, index),
+      chosenCountry,
+      ...this.state.countries.slice(index + 1)
+    ]
+    this.setState({
+      countries
+    })
+  }
+
   render() {
     return (
       <NavigationContainer>
@@ -102,7 +119,7 @@ export default class App extends Component {
             tabBarActiveTintColor: colors.primaryDark,
           }}
         >
-          <Tab.Screen name="CitiesNav" initialParams={{cities: this.state.cities,addCity: this.addCity,addLocation: this.addLocation}} 
+          <Tab.Screen name="CitiesNav" initialParams={{cities: this.state.cities,addCity: this.addCity, addLocation: this.addLocation}} 
             component={CitiesStackScreen} 
             options={{
               tabBarIcon: () => (
@@ -110,7 +127,7 @@ export default class App extends Component {
               )
             }}
             />
-          <Tab.Screen name="AddCity"   initialParams={{cities: this.state.cities,addCity: this.addCity,addLocation: this.addLocation}} 
+          <Tab.Screen name="AddCity"   initialParams={{cities: this.state.cities,addCity: this.addCity, addLocation: this.addLocation}} 
             component={AddCity} 
             options={{
               tabBarIcon: () => (
